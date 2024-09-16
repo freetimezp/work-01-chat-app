@@ -29,6 +29,13 @@ html, body {
     display: flex;
     align-items: center;
     justify-content: center;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.form-login {
+    margin-right: 1rem;
 }
 
 .footer {
@@ -57,26 +64,35 @@ html, body {
 }
 
 /* form */
-.form-wrapper {
+.form-block {
     opacity: 0;
-    background-color: gray;
-    width: 0%;
     position: fixed;
+    width: 0%;
     right: -100%;
     bottom: 8rem;
-    padding: 1rem;
-    border-radius: 4px;
     transition: all .3s ease-out;
+    background-color: gray;
+    border-radius: 4px;
     overflow: hidden;
 }
 
-.form-wrapper.active {
+#form-block {
+    display: flex;
+
+}
+
+.form-wrapper {
+    padding: 1rem;
+}
+
+.form-block.active {
     opacity: 1;
     width: 400px;
     right: 3rem;
 }
 
-.form-wrapper h2 {
+.form-wrapper h2,
+.form-content h2 {
     text-align: center;
     margin-block: 1rem;
 }
@@ -86,15 +102,19 @@ html, body {
     display: block;
 }
 
+.form-wrapper select {
+    margin-bottom: 20px;
+}
+
 .form-wrapper input, 
 .form-wrapper textarea {
     border: none;
     outline: none;
     width: 100%;
+    padding: 0.5rem;
 }
 
 .form-wrapper input {
-    padding: 1rem;
     margin-bottom: 1rem;
 }
 
@@ -112,7 +132,7 @@ html, body {
 }
 
 .form-wrapper button {
-    padding: 1rem 2.5rem;
+    padding: 0.5rem 1rem;
     border: 1px solid #fff;
     cursor: pointer;
     background-color: #fff;

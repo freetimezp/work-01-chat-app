@@ -12,39 +12,51 @@
 
 <body>
     <header class="header">
-        header
+        <span>
+            Логотип
+        </span>
+        <div class="form-login">
+            <input type="text" placeholder="email" name="login" value="">
+            <input type="password" placeholder="password" name="password" value="">
+            <button>Логин</button>
+        </div>
     </header>
     <div class="container">
-        <div class="form-wrapper">
-            <h2>Задай питання..</h2>
+        <div class="form-block" id="form-block">
+            <div class="form-wrapper">
+                <h2>Розпочніть бесіду <br> <small>(відправивши повідомлення)</small></h2>
 
-            <form id="chatForm">
-                <div class="form-close-btn" id="close-chat-btn">
-                    <i class="ri-close-large-line"></i>
-                </div>
+                <form id="chatForm">
+                    <div class="form-close-btn" id="close-chat-btn">
+                        <i class="ri-close-large-line"></i>
+                    </div>
 
-                <label for="name">Як до вас звертатись?</label>
-                <input type="text" id="name" name="name" required>
+                    <div>
+                        <input type="text" id="username" name="username" placeholder="Iм'я">
+                    </div>
 
-                <label for="email">Електронна пошта:</label>
-                <input type="email" id="email" name="email" required>
+                    <div>
+                        <input type="email" id="useremail" name="useremail" placeholder="Електронна пошта">
+                    </div>
 
+                    <label for="topic" id="select-label">Тема (обери зі списку):</label>
+                    <select id="topic" name="topic" required>
+                        <option value="Topic 1">Тема 1</option>
+                        <option value="Topic 2">Тема 2</option>
+                        <option value="Topic 3">Тема 3</option>
+                    </select>
 
-                <label for="topic" id="select-label">Тема (обери зі списку):</label>
-                <select id="topic" name="topic" required>
-                    <option value="Topic 1">Тема 1</option>
-                    <option value="Topic 2">Тема 2</option>
-                    <option value="Topic 3">Тема 3</option>
-                </select>
+                    <textarea id="message" name="message" rows="4" cols="50" placeholder="Наберіть текст повідомлення"
+                        required></textarea>
 
-                <label for="message">Що вас цікавить?</label>
-                <textarea id="message" name="message" rows="4" cols="50" required></textarea>
+                    <input type="hidden" id="token" name="token" value="">
+                    <button type="submit">Відправити</button>
+                </form>
+            </div>
 
-                <input type="hidden" id="token" name="token" value="">
-                <button type="submit">Відправити</button>
-            </form>
+            <div class="form-content">
+            </div>
         </div>
-
 
         <div class="chat-icon" id="chat-icon-toggle">
             <box-icon name='chat'></box-icon>
