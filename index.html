@@ -5,13 +5,58 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/remixicon@4.3.0/fonts/remixicon.css" rel="stylesheet" />
     <link rel="stylesheet" href="./assets/css/style.css">
-    <title>Project</title>
+    <title>Project | Chat App</title>
 </head>
 
 <body>
-    start
+    <header class="header">
+        header
+    </header>
+    <div class="container">
+        <div class="form-wrapper">
+            <h2>Задай питання..</h2>
 
+            <form id="chatForm">
+                <div class="form-close-btn" id="close-chat-btn">
+                    <i class="ri-close-large-line"></i>
+                </div>
+
+                <label for="name">Як до вас звертатись?</label>
+                <input type="text" id="name" name="name" required>
+
+                <label for="email">Електронна пошта:</label>
+                <input type="email" id="email" name="email" required>
+
+
+                <label for="topic" id="select-label">Тема (обери зі списку):</label>
+                <select id="topic" name="topic" required>
+                    <option value="Topic 1">Тема 1</option>
+                    <option value="Topic 2">Тема 2</option>
+                    <option value="Topic 3">Тема 3</option>
+                </select>
+
+                <label for="message">Що вас цікавить?</label>
+                <textarea id="message" name="message" rows="4" cols="50" required></textarea>
+
+                <input type="hidden" id="token" name="token" value="">
+                <button type="submit">Відправити</button>
+            </form>
+        </div>
+
+
+        <div class="chat-icon" id="chat-icon-toggle">
+            <box-icon name='chat'></box-icon>
+        </div>
+    </div>
+    <footer class="footer">
+        footer
+    </footer>
+
+
+
+    <script src="https://unpkg.com/boxicons@2.1.4/dist/boxicons.js"></script>
     <script src="./assets/js/main.js"></script>
 </body>
 
