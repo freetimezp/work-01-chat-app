@@ -46,10 +46,13 @@ window.addEventListener("DOMContentLoaded", () => {
                 console.log(xhr.responseText); // Response from server
                 //alert("Message sent successfully!");
 
-                document.getElementById("username").value = '';
-                document.getElementById("useremail").value = '';
-                document.getElementById("topic").value = '';
-                document.getElementById("message").value = '';
+
+
+                //clear form
+                // document.getElementById("username").value = '';
+                // document.getElementById("useremail").value = '';
+                // document.getElementById("topic").value = '';
+                // document.getElementById("message").value = '';
             }
         };
 
@@ -58,7 +61,7 @@ window.addEventListener("DOMContentLoaded", () => {
 
     // Generate a simple token for user identification
     function generateToken() {
-        return Math.random().toString(36).substring(7); // Basic token generation for demonstration
+        return Math.random().toString(36); // Basic token generation for demonstration
     }
 
 });
