@@ -38,6 +38,19 @@ html, body {
     margin-right: 1rem;
 }
 
+.manager-user {
+    padding: 1rem;
+}
+
+.logout {
+    font-size: 12px;
+    color: #fff;
+    padding: 2px 4px;
+    background-color: #6c6c6c;
+    cursor: pointer;
+    border-radius: 1px;
+}
+
 .footer {
     background-color: orange;
     height: 2rem;
@@ -62,6 +75,7 @@ html, body {
     width: 30px;
     height: 30px;
 }
+
 
 /* form */
 .form-block {

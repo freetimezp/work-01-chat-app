@@ -1,3 +1,9 @@
+<?php
+session_start(); // starts the session
+//save main page in session
+$_SESSION['url'] = $_SERVER['REQUEST_URI'];
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -15,11 +21,20 @@
         <span>
             Логотип
         </span>
-        <div class="form-login">
-            <input type="text" placeholder="email" name="login" value="">
-            <input type="password" placeholder="password" name="password" value="">
-            <button>Логин</button>
-        </div>
+        <?php if (!isset($_SESSION['manager_email'])): ?>
+            <form class="form-login" method="POST" action="login.php">
+                <input type="text" placeholder="email" name="email" required>
+                <input type="password" placeholder="password" name="password" required>
+                <button type="submit">Логин</button>
+            </form>
+        <?php else: ?>
+            <form class="manager-user" method="POST" action="logout.php">
+                <span>Hello Manager - <b><?php echo $_SESSION['manager_email']; ?></b></span>
+                <button type="submit" class="logout">logout</button>
+            </form>
+        <?php endif ?>
+
+
     </header>
     <div class="container">
         <div class="form-block" id="form-block">
