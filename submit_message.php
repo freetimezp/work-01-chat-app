@@ -6,18 +6,21 @@ require_once 'connect.php';
 $data = json_decode(file_get_contents("php://input"), true);
 
 if ($data) {
-    $name = $data['name'];
-    $email = $data['email'];
+    //print_r($data);
+
+    $user_id = $data['user_id'];
     $topic = $data['topic'];
-    $message = $data['message'];
+    $message_text = $data['message_text'];
     $token = $data['token'];
+    $created_at = date("Y-m-d", null);
+    //print_r($created_at);
 
     // Insert message into the database
-    $query = "INSERT INTO messages (user_name, user_email, topic, message, token) 
+    $query = "INSERT INTO messages (user_id, topic, message_text, token, created_at) 
               VALUES (?, ?, ?, ?, ?)";
 
     if ($stmt = $conn->prepare($query)) {
-        $stmt->bind_param("sssss", $name, $email, $topic, $message, $token);
+        $stmt->bind_param("sssss", $user_id, $topic, $message_text, $token, $created_at);
         $stmt->execute();
         $stmt->close();
 

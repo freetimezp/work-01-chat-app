@@ -22,19 +22,22 @@ window.addEventListener("DOMContentLoaded", () => {
     document.getElementById("chatForm").addEventListener("submit", function (event) {
         event.preventDefault(); // Prevent form submission
 
-        const name = document.getElementById("username").value || "Quest";
-        const email = document.getElementById("useremail").value || "no email";
+        const user_id = document.getElementById("hidden_user_id").value || "";
+        //console.log(user_id);
+
         const topic = document.getElementById("topic").value;
-        const message = document.getElementById("message").value;
+        const message_text = document.getElementById("message").value;
         const token = generateToken(); // Token generation function
+        //console.log(token);
 
         const data = {
-            name: name,
-            email: email,
+            user_id: user_id,
             topic: topic,
-            message: message,
+            message_text: message_text,
             token: token
         };
+
+        //console.log(data);
 
         // AJAX Request to submit the form
         var xhr = new XMLHttpRequest();
@@ -46,13 +49,9 @@ window.addEventListener("DOMContentLoaded", () => {
                 console.log(xhr.responseText); // Response from server
                 //alert("Message sent successfully!");
 
-
-
                 //clear form
-                // document.getElementById("username").value = '';
-                // document.getElementById("useremail").value = '';
-                // document.getElementById("topic").value = '';
-                // document.getElementById("message").value = '';
+                document.getElementById("topic").value = '';
+                document.getElementById("message").value = '';
             }
         };
 
