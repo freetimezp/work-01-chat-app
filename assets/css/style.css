@@ -163,14 +163,22 @@ html, body {
     background-color: #c2d5f4;
 }
 
-.form-content {
+#messageList {
     background-color: #000;
     color: #fff;
     margin-block: 2px;
-    height: 600px;
+    height: 0px;
+    opacity: 0;
+    overflow: hidden;
     max-height: 600px;
-    overflow-y: scroll;
     padding: 10px;
+    transition: all 0.5s ease-out;
+}
+
+#messageList.active {
+    height: 600px;
+    opacity: 1;
+    overflow-y: scroll;
 }
 
 

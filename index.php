@@ -35,6 +35,13 @@ require("functions.php");
                     const newMessageCount = parseInt(xhr.responseText);
                     if (newMessageCount !== currentMessageCount) { // Only fetch messages if the count changes
                         currentMessageCount = newMessageCount;
+
+                        check = document.getElementById("messageList").classList.contains("check");
+
+                        if (!check) {
+                            document.getElementById("messageList").classList.add("active");
+                        }
+
                         fetchNewMessages(); // Fetch new messages
                     }
                 }
@@ -49,9 +56,17 @@ require("functions.php");
             xhr.onreadystatechange = function() {
                 if (xhr.readyState == 4 && xhr.status == 200) {
                     document.getElementById("messageList").innerHTML = xhr.responseText; // Update the messages list
+
+                    scrollToBottom();
                 }
             };
             xhr.send();
+        }
+
+        // Function to scroll to the bottom of the message list
+        function scrollToBottom() {
+            var messageList = document.getElementById('messageList');
+            messageList.scrollTop = messageList.scrollHeight; // Scroll to the bottom
         }
     </script>
 </head>

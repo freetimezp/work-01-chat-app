@@ -4,18 +4,32 @@ window.addEventListener("DOMContentLoaded", () => {
     const toggleChat = document.getElementById("chat-icon-toggle");
     const closeChat = document.getElementById("close-chat-btn");
     const formBlock = document.querySelector(".form-block");
+    const formContent = document.getElementById("messageList");
 
-    toggleChat.addEventListener("click", () => {
-        if (formBlock.classList.contains("active")) {
+    if (toggleChat) {
+        toggleChat.addEventListener("click", () => {
+            if (formBlock.classList.contains("active")) {
+                if (formContent.classList.contains("active")) {
+                    formContent.classList.remove("active");
+                    formContent.classList.add("check");
+                }
+                formBlock.classList.remove("active");
+            } else {
+                formContent.classList.remove("check");
+                formBlock.classList.add("active");
+            }
+        })
+    }
+
+    if (closeChat) {
+        closeChat.addEventListener("click", () => {
             formBlock.classList.remove("active");
-        } else {
-            formBlock.classList.add("active");
-        }
-    })
+            if (formContent.classList.contains("active")) {
+                formContent.classList.remove("active");
+            }
+        });
+    }
 
-    closeChat.addEventListener("click", () => {
-        formBlock.classList.remove("active");
-    })
 
 
     //send form data
