@@ -18,6 +18,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     //print_r($_SESSION['url']);
 
     if ($user && password_verify($password, $user['password'])) {
+        // After successful login
         $_SESSION['user_name'] = $user['name'];
         $_SESSION['user_email'] = $user['email'];
         $_SESSION['role'] = $user['role'];

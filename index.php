@@ -85,7 +85,7 @@ require("functions.php");
             </form>
         <?php else: ?>
             <form class="manager-user" method="POST" action="logout.php">
-                <span>Hello Manager - <b><?php echo $_SESSION['user_email']; ?></b></span>
+                <span>Hello - <b><?php echo $_SESSION['user_email']; ?></b></span>
                 <button type="submit" class="logout">logout</button>
             </form>
         <?php endif ?>
