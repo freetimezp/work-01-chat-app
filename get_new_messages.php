@@ -6,15 +6,23 @@ session_start();
 $role = isset($_SESSION['role']) ? $_SESSION['role'] : null;
 $userId = isset($_SESSION['user_id']) ? $_SESSION['user_id'] : null;
 
-// Query to join messages with users table to get the name from users table
+// Modify the query depending on the user's role
 if ($role === 'admin') {
     // Admin sees all messages
     $query = "SELECT messages.*, users.name 
               FROM messages 
               JOIN users ON messages.user_id = users.user_id
               ORDER BY messages.created_at ASC";
+} elseif ($role === 'manager') {
+    // Manager sees messages only for their assigned topic
+    $query = "SELECT messages.*, users.name 
+              FROM messages 
+              JOIN users ON messages.user_id = users.user_id
+              JOIN topics ON messages.topic = topics.title
+              WHERE topics.manager_id = ?
+              ORDER BY messages.created_at ASC";
 } else {
-    // Regular user sees only their messages
+    // Regular users see only their messages
     $query = "SELECT messages.*, users.name 
               FROM messages 
               JOIN users ON messages.user_id = users.user_id
@@ -24,8 +32,12 @@ if ($role === 'admin') {
 
 $stmt = $conn->prepare($query);
 
-if ($role !== 'admin') {
-    $stmt->bind_param("s", $userId);  // Bind the user ID for regular users
+if ($role === 'manager') {
+    // Bind manager's user ID to filter messages by assigned topic
+    $stmt->bind_param("s", $userId);
+} elseif ($role !== 'admin') {
+    // Bind user ID for regular users
+    $stmt->bind_param("s", $userId);
 }
 
 $stmt->execute();
@@ -36,6 +48,8 @@ $messages = [];
 while ($row = $result->fetch_assoc()) {
     $messages[] = $row;  // Collect all message rows
 }
+
+//var_dump(count($messages));
 
 if (count($messages) > 0) {
     // Loop through the messages and display them

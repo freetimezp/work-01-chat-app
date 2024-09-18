@@ -90,7 +90,10 @@ require("functions.php");
             </form>
         <?php endif ?>
     </header>
-    <?php show($_SESSION); ?>
+
+    <?php
+    show($_SESSION);
+    ?>
 
     <div class="container">
         <div class="form-block" id="form-block">
@@ -103,14 +106,14 @@ require("functions.php");
 
                 <form id="chatForm">
                     <input type="hidden" id="hidden_user_id" name="hidden_user_id"
-                        value="<?= $_SESSION['user_id']; ?>" />
+                        value="<?= isset($_SESSION['user_id']) ? $_SESSION['user_id'] : ''; ?>" />
                     <input type="hidden" id="token" name="token" value="">
 
                     <label for="topic" id="select-label">Тема (обери зі списку):</label>
                     <select id="topic" name="topic" required>
-                        <option value="Topic 1" selected>Тема 1</option>
-                        <option value="Topic 2">Тема 2</option>
-                        <option value="Topic 3">Тема 3</option>
+                        <option value="Topic 1" selected>Topic 1</option>
+                        <option value="Topic 2">Topic 2</option>
+                        <option value="Topic 3">Topic 3</option>
                     </select>
 
                     <textarea id="message" name="message" rows="4" cols="50" placeholder="Наберіть текст повідомлення"

@@ -13,11 +13,11 @@ table 1 = messages
     token VARCHAR(255) NOT NULL,
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 
-table 2 = managers 
+table 2 = users 
     id INT AUTO_INCREMENT PRIMARY KEY,
     name VARCHAR(255) NOT NULL,
     email VARCHAR(255) NOT NULL,
-    topic VARCHAR(100) NOT NULL
+    user_id VARCHAR(100) NOT NULL
 
 
 
