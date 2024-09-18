@@ -51,11 +51,12 @@ while ($row = $result->fetch_assoc()) {
 
 //var_dump(count($messages));
 
+
 if (count($messages) > 0) {
     // Loop through the messages and display them
     foreach ($messages as $message) {
         echo '
-            <div class="message-block">
+            <div class="message-block" onclick="replyToMessage(\'' . $message['token'] . '\')">
                 <div class="message-block__header">
                     <div class="message-avatar">
                         ' . substr(htmlspecialchars($message['name']), 0, 1) . ' 

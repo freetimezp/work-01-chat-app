@@ -68,6 +68,13 @@ require("functions.php");
             var messageList = document.getElementById('messageList');
             messageList.scrollTop = messageList.scrollHeight; // Scroll to the bottom
         }
+
+        function replyToMessage(token) {
+            // token to value answer_to
+            document.getElementById('answerTo').value = token;
+
+            //console.log("message with token: " + token);
+        }
     </script>
 </head>
 
@@ -99,15 +106,15 @@ require("functions.php");
         <div class="form-block" id="form-block">
             <div class="form-wrapper">
                 <h2>Розпочніть бесіду</h2>
-                <hr>
 
                 <div class="form-content" id="messageList"></div>
-                <hr>
 
                 <form id="chatForm">
                     <input type="hidden" id="hidden_user_id" name="hidden_user_id"
                         value="<?= isset($_SESSION['user_id']) ? $_SESSION['user_id'] : ''; ?>" />
                     <input type="hidden" id="token" name="token" value="">
+
+                    <input type="hidden" id="answerTo" name="answer_to" value="" />
 
                     <label for="topic" id="select-label">Тема (обери зі списку):</label>
                     <select id="topic" name="topic" required>
