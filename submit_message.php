@@ -12,7 +12,7 @@ if ($data) {
     $topic = $data['topic'];
     $message_text = $data['message_text'];
     $token = $data['token'];
-    $created_at = date("Y-m-d", null);
+    $created_at = date("Y-m-d H:i:s", null);
     //print_r($created_at);
 
     // Insert message into the database

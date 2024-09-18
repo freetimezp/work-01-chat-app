@@ -2,7 +2,7 @@
 require_once 'connect.php';
 
 // Fetch all messages from the database
-$query = "SELECT * FROM messages ORDER BY created_at DESC";
+$query = "SELECT * FROM messages ORDER BY created_at ASC";
 $result = $conn->query($query);
 
 if ($result->num_rows) {

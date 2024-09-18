@@ -41,7 +41,7 @@ window.addEventListener("DOMContentLoaded", () => {
 
         const topic = document.getElementById("topic").value;
         const message_text = document.getElementById("message").value;
-        const token = generateToken(); // Token generation function
+        const token = generateToken(40); // Token generation function
         //console.log(token);
 
         const data = {
@@ -73,10 +73,17 @@ window.addEventListener("DOMContentLoaded", () => {
     });
 
     // Generate a simple token for user identification
-    function generateToken() {
-        return Math.random().toString(36); // Basic token generation for demonstration
+    function generateToken(tokenLength) {
+        let result = '';
+        const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789_*@#$%^&';
+        const charactersLength = characters.length;
+        let counter = 0;
+        while (counter < tokenLength) {
+            result += characters.charAt(Math.floor(Math.random() * charactersLength));
+            counter += 1;
+        }
+        return result;
     }
-
 });
 
 
