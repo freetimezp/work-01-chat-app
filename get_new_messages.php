@@ -65,13 +65,14 @@ if (count($messages) > 0) {
         }
 
         echo '
-            <div class="message-block' . $additionalClass . '" onclick="replyToMessage(\'' . $message['token'] . '\')">
+            <div class="message-block' . $additionalClass . '" data-token="' . $message['token']
+            . '" onclick="replyToMessage(\'' . $message['token'] . '\')">
                 <div class="message-block__header">
                     <div class="message-avatar">
                         ' . substr(htmlspecialchars($message['name']), 0, 1) . ' 
                     </div>
                     <div class="message-name">
-                        ' . htmlspecialchars($message['name']) . '  <!-- Display user name from users table -->
+                        ' . htmlspecialchars($message['name']) . '  
                     </div>
                     <div class="message-date">
                         ' . htmlspecialchars($message['created_at']) . ' 

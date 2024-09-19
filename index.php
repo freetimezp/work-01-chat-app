@@ -20,11 +20,27 @@ require("functions.php");
 
     <script>
         let currentMessageCount = 0; // Store the current count of messages
-        checkMessageCount();
+
         // Poll for message count every 5 seconds
         setInterval(function() {
             checkMessageCount();
-        }, 500000); // Poll every 5 seconds
+
+            reapplyActiveMessage();
+        }, 5000); // Poll every 5 seconds
+        setInterval(function() {
+            $.ajax({
+                url: 'get_new_messages.php',
+                method: 'GET',
+                success: function(response) {
+                    // Update message list
+                    $('#messageList').html(response);
+
+                    // Reapply active message after the update
+                    reapplyActiveMessage();
+                }
+            });
+        }, 5000);
+
 
         // Function to check the count of messages from the server
         function checkMessageCount() {
@@ -57,7 +73,10 @@ require("functions.php");
                 if (xhr.readyState == 4 && xhr.status == 200) {
                     document.getElementById("messageList").innerHTML = xhr.responseText; // Update the messages list
 
-                    scrollToBottom();
+                    // After updating the message list, reapply the 'message-active' class
+                    reapplyActiveMessage();
+
+                    scrollToBottom(); // Optional: Scroll to the bottom
                 }
             };
             xhr.send();
@@ -69,11 +88,37 @@ require("functions.php");
             messageList.scrollTop = messageList.scrollHeight; // Scroll to the bottom
         }
 
-        function replyToMessage(token) {
-            // token to value answer_to
-            document.getElementById('answerTo').value = token;
 
-            //console.log("message with token: " + token);
+        let activeMessageToken = null; // Variable to store the token of the active message
+
+        function replyToMessage(token) {
+            // Remove 'message-active' from all messages
+            document.querySelectorAll('.message-block').forEach(function(messageBlock) {
+                messageBlock.classList.remove('message-active');
+            });
+
+            // Add 'message-active' class to the clicked message
+            let clickedMessage = document.querySelector(`[data-token='${token}']`);
+            if (clickedMessage) {
+                clickedMessage.classList.add('message-active');
+            }
+
+            // Store the selected message's token
+            activeMessageToken = token;
+
+            // Optionally store in localStorage to persist across page reloads
+            localStorage.setItem('activeMessageToken', token);
+        }
+
+        // Function to reapply 'message-active' class after refresh
+        function reapplyActiveMessage() {
+            const storedToken = localStorage.getItem('activeMessageToken');
+            if (storedToken) {
+                let activeMessage = document.querySelector(`[data-token='${storedToken}']`);
+                if (activeMessage) {
+                    activeMessage.classList.add('message-active');
+                }
+            }
         }
     </script>
 </head>
@@ -153,6 +198,7 @@ require("functions.php");
     </footer>
 
 
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
 
     <script src="https://unpkg.com/boxicons@2.1.4/dist/boxicons.js"></script>
     <script src="./assets/js/main.js"></script>
