@@ -197,14 +197,27 @@ html, body {
 
 /* message */
 .message-block {
-    width: 100%;
+    width: 90%;
     display: flex;
     flex-direction: column;
-    padding: 10px 10px 20px 10px;
+    padding: 5px 10px 0px 5px;
     border-radius: 20px;
     background-color: #272626;
     margin-bottom: 10px;
     border: 2px solid #272626;
+}
+
+.message-block.message-manager,
+.message-block.message-admin {
+    margin-left: auto;
+}
+
+.message-block.message-manager {
+    background-color: #160840;
+}
+
+.message-block.message-admin {
+    background-color: #03390a;
 }
 
 .message-block__header {
@@ -212,6 +225,10 @@ html, body {
     justify-content: space-between;
     align-items: center;
     gap: 2rem;
+}
+
+.message-block__content {
+    margin-bottom: 10px;
 }
 
 .message-avatar {
@@ -230,4 +247,12 @@ html, body {
 .message-name {
     text-transform: capitalize;
     color: #ed9f75;
+}
+
+.message-block.message-manager .message-avatar {
+    background-color: #2e1870;
+}
+
+.message-block.message-admin .message-avatar {
+    background-color: #097918;
 }

@@ -9,13 +9,13 @@ $userId = isset($_SESSION['user_id']) ? $_SESSION['user_id'] : null;
 // Modify the query depending on the user's role
 if ($role === 'admin') {
     // Admin sees all messages
-    $query = "SELECT messages.*, users.name 
+    $query = "SELECT messages.*, users.name, users.role 
               FROM messages 
               JOIN users ON messages.user_id = users.user_id
               ORDER BY messages.created_at ASC";
 } elseif ($role === 'manager') {
     // Manager sees messages only for their assigned topic
-    $query = "SELECT messages.*, users.name 
+    $query = "SELECT messages.*, users.name, users.role 
               FROM messages 
               JOIN users ON messages.user_id = users.user_id
               JOIN topics ON messages.topic = topics.title
@@ -23,7 +23,7 @@ if ($role === 'admin') {
               ORDER BY messages.created_at ASC";
 } else {
     // Regular users see only their messages and any responses to their messages
-    $query = "SELECT messages.*, users.name 
+    $query = "SELECT messages.*, users.name, users.role 
               FROM messages 
               JOIN users ON messages.user_id = users.user_id
               WHERE messages.user_id = ? 
@@ -56,8 +56,16 @@ while ($row = $result->fetch_assoc()) {
 if (count($messages) > 0) {
     // Loop through the messages and display them
     foreach ($messages as $message) {
+        // Determine additional class based on the sender's role
+        $additionalClass = '';
+        if ($message['role'] === 'admin') {
+            $additionalClass = ' message-admin';
+        } elseif ($message['role'] === 'manager') {
+            $additionalClass = ' message-manager';
+        }
+
         echo '
-            <div class="message-block" onclick="replyToMessage(\'' . $message['token'] . '\')">
+            <div class="message-block' . $additionalClass . '" onclick="replyToMessage(\'' . $message['token'] . '\')">
                 <div class="message-block__header">
                     <div class="message-avatar">
                         ' . substr(htmlspecialchars($message['name']), 0, 1) . ' 

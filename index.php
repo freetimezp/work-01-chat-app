@@ -20,11 +20,11 @@ require("functions.php");
 
     <script>
         let currentMessageCount = 0; // Store the current count of messages
-
+        checkMessageCount();
         // Poll for message count every 5 seconds
         setInterval(function() {
             checkMessageCount();
-        }, 5000); // Poll every 5 seconds
+        }, 500000); // Poll every 5 seconds
 
         // Function to check the count of messages from the server
         function checkMessageCount() {
