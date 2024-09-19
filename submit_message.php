@@ -11,6 +11,7 @@ $role = isset($_SESSION['role']) ? $_SESSION['role'] : "user";
 $user_id = isset($_SESSION['user_id']) ? $_SESSION['user_id'] : null;
 
 if ($data) {
+    print_r($data);
     // Default values from the data
     $topic = $data['topic'];
     $message_text = $data['message_text'];

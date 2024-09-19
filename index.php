@@ -20,6 +20,7 @@ require("functions.php");
 
     <script>
         let currentMessageCount = 0; // Store the current count of messages
+        let activeMessageToken = null; // Variable to store the token of the active message
 
         // Poll for message count every 5 seconds
         setInterval(function() {
@@ -89,7 +90,6 @@ require("functions.php");
         }
 
 
-        let activeMessageToken = null; // Variable to store the token of the active message
 
         function replyToMessage(token) {
             // Remove 'message-active' from all messages
@@ -108,6 +108,8 @@ require("functions.php");
 
             // Optionally store in localStorage to persist across page reloads
             localStorage.setItem('activeMessageToken', token);
+
+            document.getElementById('answerTo').value = token;
         }
 
         // Function to reapply 'message-active' class after refresh
@@ -119,6 +121,12 @@ require("functions.php");
                     activeMessage.classList.add('message-active');
                 }
             }
+        }
+
+        function clearAnswetToken() {
+            activeMessageToken = null;
+            document.getElementById('answerTo').value = "";
+            localStorage.removeItem('activeMessageToken');
         }
     </script>
 </head>
@@ -169,6 +177,16 @@ require("functions.php");
                             <option value="Topic 3">Topic 3</option>
                         </select>
                     <?php endif; ?>
+
+                    <?php if (
+                        isset($_SESSION['user_id'])
+                        && ($_SESSION['role'] === "manager" || $_SESSION['role'] === "admin")
+                    ): ?>
+                        <div class="clear-answer-btn" onclick="clearAnswetToken()">
+                            Clear Answer Token
+                        </div>
+                    <?php endif; ?>
+
 
                     <textarea id="message" name="message" rows="4" cols="50" placeholder="Наберіть текст повідомлення"
                         required></textarea>

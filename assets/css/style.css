@@ -270,6 +270,16 @@ html, body {
 }
 
 .message-active {
-    border: 2px solid blue;  /* Example: Highlight with a blue border */
-    background-color: #f0f8ff;  /* Light background to indicate it's selected */
+    border: 2px solid #5d82e5;  /* Example: Highlight with a blue border */
+}
+
+.clear-answer-btn {
+    padding: 1px 2px;
+    background-color: blue;
+    color: #fff;
+    border-radius: 10px;
+    width: 150px;
+    text-align: center;
+    margin-bottom: 10px;
+    cursor: pointer;
 }
