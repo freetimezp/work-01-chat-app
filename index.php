@@ -116,12 +116,14 @@ require("functions.php");
 
                     <input type="hidden" id="answerTo" name="answer_to" value="" />
 
-                    <label for="topic" id="select-label">Тема (обери зі списку):</label>
-                    <select id="topic" name="topic" required>
-                        <option value="Topic 1" selected>Topic 1</option>
-                        <option value="Topic 2">Topic 2</option>
-                        <option value="Topic 3">Topic 3</option>
-                    </select>
+                    <?php if (isset($_SESSION['user_id']) && $_SESSION['role'] !== "manager"): ?>
+                        <label for="topic" id="select-label">Тема (обери зі списку):</label>
+                        <select id="topic" name="topic" required>
+                            <option value="Topic 1" selected>Topic 1</option>
+                            <option value="Topic 2">Topic 2</option>
+                            <option value="Topic 3">Topic 3</option>
+                        </select>
+                    <?php endif; ?>
 
                     <textarea id="message" name="message" rows="4" cols="50" placeholder="Наберіть текст повідомлення"
                         required></textarea>

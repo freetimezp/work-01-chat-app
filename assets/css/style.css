@@ -204,6 +204,7 @@ html, body {
     border-radius: 20px;
     background-color: #272626;
     margin-bottom: 10px;
+    border: 2px solid #272626;
 }
 
 .message-block__header {

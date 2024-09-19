@@ -22,11 +22,14 @@ if ($role === 'admin') {
               WHERE topics.manager_id = ?
               ORDER BY messages.created_at ASC";
 } else {
-    // Regular users see only their messages
+    // Regular users see only their messages and any responses to their messages
     $query = "SELECT messages.*, users.name 
               FROM messages 
               JOIN users ON messages.user_id = users.user_id
               WHERE messages.user_id = ? 
+              OR messages.answer_to IN (
+                  SELECT token FROM messages WHERE user_id = ?
+              )
               ORDER BY messages.created_at ASC";
 }
 
@@ -36,8 +39,8 @@ if ($role === 'manager') {
     // Bind manager's user ID to filter messages by assigned topic
     $stmt->bind_param("s", $userId);
 } elseif ($role !== 'admin') {
-    // Bind user ID for regular users
-    $stmt->bind_param("s", $userId);
+    // Bind user ID for regular users (used twice for both user_id and answer_to logic)
+    $stmt->bind_param("ss", $userId, $userId);
 }
 
 $stmt->execute();
@@ -49,9 +52,7 @@ while ($row = $result->fetch_assoc()) {
     $messages[] = $row;  // Collect all message rows
 }
 
-//var_dump(count($messages));
-
-
+// Check if there are messages and display them
 if (count($messages) > 0) {
     // Loop through the messages and display them
     foreach ($messages as $message) {
