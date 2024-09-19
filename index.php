@@ -123,10 +123,13 @@ require("functions.php");
             }
         }
 
-        function clearAnswetToken() {
+        function clearAnswerToken() {
             activeMessageToken = null;
             document.getElementById('answerTo').value = "";
             localStorage.removeItem('activeMessageToken');
+            document.querySelectorAll('.message-block').forEach(function(messageBlock) {
+                messageBlock.classList.remove('message-active');
+            });
         }
     </script>
 </head>
@@ -158,8 +161,6 @@ require("functions.php");
     <div class="container">
         <div class="form-block" id="form-block">
             <div class="form-wrapper">
-                <h2>Розпочніть бесіду</h2>
-
                 <div class="form-content" id="messageList"></div>
 
                 <form id="chatForm">
@@ -169,20 +170,18 @@ require("functions.php");
 
                     <input type="hidden" id="answerTo" name="answer_to" value="" />
 
-                    <?php if (isset($_SESSION['user_id']) && $_SESSION['role'] !== "manager"): ?>
-                        <label for="topic" id="select-label">Тема (обери зі списку):</label>
-                        <select id="topic" name="topic" required>
-                            <option value="Topic 1" selected>Topic 1</option>
-                            <option value="Topic 2">Topic 2</option>
-                            <option value="Topic 3">Topic 3</option>
-                        </select>
-                    <?php endif; ?>
+                    <label for="topic" id="select-label">Тема (обери зі списку):</label>
+                    <select id="topic" name="topic" required>
+                        <option value="Lorem ipsume text 1" selected>Lorem ipsume text 1</option>
+                        <option value="Lorem ipsume text 2">Lorem ipsume text 2</option>
+                        <option value="Lorem ipsume text 3">Lorem ipsume text 3</option>
+                    </select>
 
                     <?php if (
                         isset($_SESSION['user_id'])
                         && ($_SESSION['role'] === "manager" || $_SESSION['role'] === "admin")
                     ): ?>
-                        <div class="clear-answer-btn" onclick="clearAnswetToken()">
+                        <div class="clear-answer-btn" onclick="clearAnswerToken()">
                             Clear Answer Token
                         </div>
                     <?php endif; ?>
@@ -192,13 +191,14 @@ require("functions.php");
                         required></textarea>
 
                     <div class="btn-block">
-                        <button type="submit" <?= !isset($_SESSION['user_email']) && 'disabled'; ?>>Відправити</button>
+                        <div class="btn form-close-btn" id="close-chat-btn">
+                            Закрити
+                        </div>
+                        <button class="btn" type="submit" <?= !isset($_SESSION['user_email']) && 'disabled'; ?>>Відправити</button>
                     </div>
                 </form>
 
-                <div class="form-close-btn" id="close-chat-btn">
-                    <i class="ri-close-large-line"></i>
-                </div>
+
             </div>
         </div>
 

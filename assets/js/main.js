@@ -43,7 +43,6 @@ window.addEventListener("DOMContentLoaded", () => {
         const message_text = document.getElementById("message").value;
         const token = generateToken(40); // Token generation function
         const answer_to = document.getElementById("answerTo").value;
-        //console.log(token);
 
         const data = {
             user_id: user_id,

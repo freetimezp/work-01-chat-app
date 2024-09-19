@@ -68,17 +68,21 @@ if (count($messages) > 0) {
             <div class="message-block' . $additionalClass . '" data-token="' . $message['token']
             . '" onclick="replyToMessage(\'' . $message['token'] . '\')">
                 <div class="message-block__header">
-                    <div class="message-avatar">
+                    <div class="message-block__header-left">
+                        <div class="message-avatar">
                         ' . substr(htmlspecialchars($message['name']), 0, 1) . ' 
+                        </div>
+                        <div class="message-name">
+                            ' . htmlspecialchars($message['name']) . '  
+                        </div>
                     </div>
-                    <div class="message-name">
-                        ' . htmlspecialchars($message['name']) . '  
-                    </div>
-                    <div class="message-date">
-                        ' . htmlspecialchars($message['created_at']) . ' 
-                    </div>
-                    <div class="message-topic">
+                    <div class="message-block__header-right">
+                        <div class="message-topic">
                         ' . htmlspecialchars($message['topic']) . ' 
+                        </div>
+                        <div class="message-date">
+                            ' . htmlspecialchars($message['created_at']) . ' 
+                        </div>
                     </div>
                 </div>
                 <div class="message-block__content">
